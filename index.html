@@ -1104,6 +1104,15 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     birthEl.value = v;
   });
 
+  /* ── 광고 유입 구분: 주소의 channel=naver|toss 를 기억했다가 신청 때 함께 보낸다 ── */
+  var CH = (function(){
+    try{
+      var q = new URLSearchParams(location.search).get('channel');
+      if (q === 'naver' || q === 'toss'){ sessionStorage.setItem('gd_channel', q); return q; }
+      return sessionStorage.getItem('gd_channel') || '';
+    }catch(_e){ return ''; }
+  })();
+
   /* ── 폼 제출 ── */
   var form = $('#bookForm'), btn = $('#submitBtn'), msg = $('#formMsg');
   var oaiSent = {};   /* OpenAI lead_created 중복 전송 방지 (연락처 기준) */
@@ -1133,7 +1142,7 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     fetch('/api/consult', {
       method:'POST',
       headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({ name:name, phone:ph, unit_type:unit || null, message: message.trim() || null })
+      body: JSON.stringify({ name:name, phone:ph, unit_type:unit || null, message: message.trim() || null, channel: CH || undefined })
     })
     .then(function(r){ if (!r.ok) throw new Error('fail'); return r.json(); })
     .then(function(){

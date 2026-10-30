@@ -10,13 +10,14 @@ module.exports = async (req, res) => {
 
   /* 광고 유입 구분. 허용 값만 받는다(임의 문자열이 source 로 들어가지 않게). */
   const fromToss = channel === 'toss';
-  const SOURCE = fromToss ? '토스-GD메트로타워' : 'GD메트로타워';
+  const fromNaver = channel === 'naver';
+  const SOURCE = fromToss ? '토스-GD메트로타워' : fromNaver ? '네이버-GD메트로타워' : 'GD메트로타워';
 
   /* ── 1. Supabase 저장 ── */
   const SUPABASE_URL = 'https://tctilpuhknxucrlnhlky.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRjdGlscHVoa254dWNybG5obGt5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMzE3NjQsImV4cCI6MjA5MTcwNzc2NH0._mS10zf3ayR7nbdFxQJHfZS57_tzOakGm-WkyQB8bxU';
 
-  const sbRes = await fetch(`${SUPABASE_URL}/rest/v1/consultations`, {
+  const save = (source) => fetch(`${SUPABASE_URL}/rest/v1/consultations`, {
     method: 'POST',
     headers: {
       'apikey': SUPABASE_KEY,
@@ -29,9 +30,12 @@ module.exports = async (req, res) => {
       phone,
       unit_type: unit_type || null,
       message: message || null,
-      source: SOURCE
+      source
     })
   });
+  let sbRes = await save(SOURCE);
+  /* 새 출처값 저장이 거부되면 상담을 놓치지 않도록 기본 출처로 한 번 더 저장 */
+  if (!sbRes.ok && fromNaver) sbRes = await save('GD메트로타워');
 
   if (!sbRes.ok) {
     const err = await sbRes.text();
@@ -60,7 +64,7 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
         to: ['xinkorea@naver.com'],
-        subject: `[GD 메트로타워${fromToss ? ' · 토스 광고' : ''}] 새 방문예약 — ${name}`,
+        subject: `[GD 메트로타워${fromToss ? ' · 토스 광고' : fromNaver ? ' · 네이버 광고' : ''}] 새 방문예약 — ${name}`,
         html: `
           <div style="font-family:'Apple SD Gothic Neo',sans-serif;max-width:520px;margin:0 auto;">
             <h2 style="color:#1C1F24;border-bottom:2px solid #680001;padding-bottom:10px;margin-bottom:16px;">
