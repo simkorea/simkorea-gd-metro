@@ -142,8 +142,8 @@
     var wrap = document.createElement('div');
     wrap.id = 'adguard-privacy-link';
     wrap.style.cssText = 'text-align:center;font-size:11px;line-height:1.6;' +
-      'padding:16px 16px 96px;color:#8b8b8b;font-family:system-ui,-apple-system,sans-serif;';
-    wrap.innerHTML = '<a href="#" style="color:#8b8b8b;text-decoration:underline;">개인정보 수집 안내</a>';
+      'padding:16px 16px 96px;color:#6b6b6b;font-family:system-ui,-apple-system,sans-serif;';
+    wrap.innerHTML = '<a href="#" style="color:#6b6b6b;text-decoration:underline;">개인정보 수집 안내</a>';
 
     wrap.querySelector('a').addEventListener('click', function (e) {
       e.preventDefault();
@@ -204,7 +204,10 @@
       '<div style="font-weight:600;margin:16px 0 6px;">6. 처리 위탁 및 보관</div>' +
       '<p style="margin:0;color:#555;">수집된 정보는 클라우드 데이터베이스 서비스(Supabase)에 저장·보관됩니다.</p>' +
 
-      '<div style="font-weight:600;margin:16px 0 6px;">7. 수집 거부 방법</div>' +
+      '<div style="font-weight:600;margin:16px 0 6px;">7. 광고 성과 측정 도구</div>' +
+      '<p style="margin:0;color:#555;">광고 유입과 신청 완료 여부를 확인하기 위해 네이버 애널리틱스·전환 추적, 토스 픽셀, OpenAI Ads 측정 스크립트가 사용될 수 있습니다. 이 과정에서 각 사업자가 쿠키 또는 유사 기술로 방문 기록을 처리합니다. 신청서에 입력하신 성함·연락처는 이 스크립트로 전송하지 않습니다.</p>' +
+
+      '<div style="font-weight:600;margin:16px 0 6px;">8. 수집 거부 방법</div>' +
       '<p style="margin:0;color:#555;">브라우저에서 자바스크립트 실행을 차단하면 위 정보는 수집되지 않습니다. 다만 이 경우 사이트 일부 기능이 정상 동작하지 않을 수 있습니다.</p>' +
 
       '<button id="adguard-privacy-close" style="margin-top:22px;width:100%;padding:11px;' +
