@@ -388,6 +388,7 @@ p{margin:0}
   font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:8px 13px;border-radius:999px;
 }
 .ut-zoom:hover .ztag{background:var(--wine)}
+#gp-vr .ut-cap{max-width:980px}
 .ut-cap{
   max-width:780px;margin:15px auto 0;text-align:center;
   font-size:13.5px;color:var(--muted);line-height:1.7;word-break:keep-all;
@@ -415,17 +416,19 @@ p{margin:0}
 .ut-table tfoot td,.ut-table tfoot th{
   border-top:1px solid var(--line);font-weight:700;background:rgba(226,218,206,.4);
 }
-.ut-vr{margin-top:clamp(34px,5vw,56px)}
-.ut-vr h3{font-size:clamp(18px,2.4vw,23px);margin-bottom:8px}
-.ut-vr>p{color:var(--muted);font-size:14.5px;margin-bottom:20px;max-width:62ch}
-.vr-grid{display:grid;gap:18px;grid-template-columns:1fr}
-@media (min-width:860px){.vr-grid{grid-template-columns:1fr 1fr}}
-.vr-box{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--night)}
-.vr-box iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
-.vr-box figcaption{
-  padding:13px 17px;background:#fff;border-top:1px solid var(--line);
-  font-size:14px;font-weight:700;letter-spacing:-.02em;
+.ut-tab-vr{border-color:var(--wine);color:var(--wine);font-weight:700}
+.vr-box{
+  position:relative;max-width:980px;margin-inline:auto;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--night);
 }
+/* krpano 가 뜨기까지 몇 초 걸린다. 빈 검은 화면 대신 안내를 깔아두고 iframe 이 덮게 한다 */
+.vr-box::before{
+  content:'360° 모델하우스를 불러오는 중…';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:rgba(241,237,231,.55);
+}
+.vr-box iframe{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0}
+@media (max-width:600px){.vr-box iframe{aspect-ratio:4/3}}
 
 /* ── 평면 확대 ── */
 .lb{position:fixed;inset:0;z-index:600;background:rgba(18,20,24,.94);display:none;overflow:auto}
@@ -811,13 +814,14 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
       <p class="sec-lead reveal d2">전체 오피스텔 <span class="num">1,095</span>실 중 이번 분양분은 B동 <span class="num">770</span>실입니다. 전용 24㎡부터 53㎡까지 6개 면적대, 20개 타입으로 구성됩니다.</p>
 
       <div class="reveal d3">
-        <div class="ut-tabs" role="tablist" aria-label="전용면적대 선택">
+        <div class="ut-tabs" role="tablist" aria-label="평면 · E-모델하우스 선택">
           <button type="button" class="ut-tab" role="tab" id="g-24" aria-controls="gp-24" aria-selected="true" tabindex="0">24㎡</button>
           <button type="button" class="ut-tab" role="tab" id="g-28" aria-controls="gp-28" aria-selected="false" tabindex="-1">28㎡</button>
           <button type="button" class="ut-tab" role="tab" id="g-29" aria-controls="gp-29" aria-selected="false" tabindex="-1">29㎡</button>
           <button type="button" class="ut-tab" role="tab" id="g-45" aria-controls="gp-45" aria-selected="false" tabindex="-1">45㎡</button>
           <button type="button" class="ut-tab" role="tab" id="g-46" aria-controls="gp-46" aria-selected="false" tabindex="-1">46㎡</button>
           <button type="button" class="ut-tab" role="tab" id="g-53" aria-controls="gp-53" aria-selected="false" tabindex="-1">53㎡</button>
+          <button type="button" class="ut-tab ut-tab-vr" role="tab" id="g-vr" aria-controls="gp-vr" aria-selected="false" tabindex="-1">E-모델하우스 <span class="nb">360°</span></button>
         </div>
         <div class="ut-pane" id="gp-24" role="tabpanel" aria-labelledby="g-24">
           <div class="ut-subtabs" role="tablist" aria-label="24㎡ 타입 선택">
@@ -1003,6 +1007,25 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
             <p class="ut-cap"><b>53㎡D</b> · 2실 · 전용 53.9742㎡(약 16.3평) · 공용 35.8268㎡ · 기타공용 54.7421㎡ · 계약 144.5431㎡(약 43.7평) · 대지지분 11.9385㎡</p>
           </div>
         </div>
+        <div class="ut-pane" id="gp-vr" role="tabpanel" aria-labelledby="g-vr" hidden>
+          <div class="ut-subtabs" role="tablist" aria-label="E-모델하우스 타입 선택">
+            <button type="button" class="ut-sub" role="tab" id="s-vr24" aria-controls="sp-vr24" aria-selected="true" tabindex="0">24㎡A</button>
+            <button type="button" class="ut-sub" role="tab" id="s-vr28" aria-controls="sp-vr28" aria-selected="false" tabindex="-1">28㎡A</button>
+          </div>
+          <div class="ut-plan" id="sp-vr24" role="tabpanel" aria-labelledby="s-vr24">
+            <div class="vr-box">
+              <iframe src="https://www.gdmetro.com/vr2/tour.html" title="24㎡A 360도 E-모델하우스" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
+            </div>
+            <p class="ut-cap"><b>24㎡A</b> · 360° 둘러보기 — 화면을 끌어 돌려보고, 거실·주방·침실·욕실 탭으로 옮겨 갑니다.</p>
+          </div>
+          <div class="ut-plan" id="sp-vr28" role="tabpanel" aria-labelledby="s-vr28" hidden>
+            <div class="vr-box">
+              <iframe src="https://www.gdmetro.com/vr2/tour2.html" title="28㎡A 360도 E-모델하우스" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
+            </div>
+            <p class="ut-cap"><b>28㎡A</b> · 360° 둘러보기 — 화면을 끌어 돌려보고, 거실·주방·침실·욕실 탭으로 옮겨 갑니다.</p>
+          </div>
+          <p class="tx-note" style="color:var(--muted);text-align:center">※ E-모델하우스는 시행사 공식 홈페이지(gdmetro.com)에서 제공하는 자료이며, 24㎡A·28㎡A 두 타입만 공개되어 있습니다.</p>
+        </div>
       </div>
 
       <div class="ut-scroll reveal" tabindex="0" role="region" aria-label="타입별 면적표 (가로 스크롤)">
@@ -1044,21 +1067,6 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
       </div>
       <p class="tx-note reveal" style="color:var(--muted)">※ 면적은 시행사 공식 홈페이지 평면정보 표기 기준이며, 소수점 이하는 실제 시공 시 일부 변경될 수 있습니다. 평면은 견본주택과 반전될 수 있습니다. 1평 = 3.3058㎡.</p>
 
-      <div class="ut-vr reveal">
-        <h3>E-모델하우스</h3>
-        <p>시행사가 제공하는 360° VR입니다. 화면 안에서 끌어 둘러보세요. 24㎡A, 28㎡A 두 타입이 공개되어 있습니다.</p>
-        <div class="vr-grid">
-          <figure class="vr-box">
-            <iframe src="https://www.gdmetro.com/vr2/tour.html" title="24㎡A 360도 E-모델하우스" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
-            <figcaption>24㎡A · 360° 둘러보기</figcaption>
-          </figure>
-          <figure class="vr-box">
-            <iframe src="https://www.gdmetro.com/vr2/tour2.html" title="28㎡A 360도 E-모델하우스" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
-            <figcaption>28㎡A · 360° 둘러보기</figcaption>
-          </figure>
-        </div>
-        <p class="tx-note" style="color:var(--muted)">※ E-모델하우스는 시행사 공식 홈페이지(gdmetro.com)에서 제공하는 자료입니다.</p>
-      </div>
 
       <dl class="spec reveal" style="margin-top:clamp(34px,5vw,56px)">
         <div><dt>공급 유형</dt><dd>오피스텔</dd></div>
