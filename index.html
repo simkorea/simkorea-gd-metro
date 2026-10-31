@@ -116,7 +116,7 @@
         {
           "@type": "Question",
           "name": "아파트입니까, 오피스텔입니까?",
-          "acceptedAnswer": { "@type": "Answer", "text": "오피스텔입니다. 총 1,095실로 공급됩니다." }
+          "acceptedAnswer": { "@type": "Answer", "text": "오피스텔입니다. 이번 공급분은 B동 770실이며, 전용 24㎡·28㎡·29㎡·45㎡·46㎡·53㎡ 6개 면적대 20개 타입으로 구성됩니다." }
         },
         {
           "@type": "Question",
@@ -355,8 +355,61 @@ p{margin:0}
   border:1px solid rgba(241,237,231,.22);color:rgba(241,237,231,.86);
 }
 
-/* ── 준비중 ── */
-.soon{
+/* ── 호실 타입 ── */
+.ut-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.ut-tab{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;line-height:1;
+  padding:12px 19px;border:1px solid var(--line);border-radius:999px;
+  background:#fff;color:var(--muted);cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.ut-tab:hover{border-color:var(--wine);color:var(--wine)}
+.ut-tab[aria-selected="true"]{background:var(--wine);border-color:var(--wine);color:var(--cream)}
+.ut-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.ut-grid[hidden]{display:none}
+.ut-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.ut-card img{width:100%;height:auto}
+.ut-card figcaption{padding:15px 17px 17px;border-top:1px solid var(--line)}
+.ut-card b{display:block;font-family:var(--display);font-size:20px;letter-spacing:.01em}
+.ut-card .u-n{
+  display:inline-block;margin-top:7px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;color:var(--wine);background:rgba(104,0,1,.07);
+  padding:4px 9px;border-radius:999px;
+}
+.ut-card .u-a{display:block;margin-top:9px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.ut-scroll{overflow-x:auto;margin-top:clamp(30px,4vw,44px);border:1px solid var(--line);border-radius:14px;background:#fff}
+.ut-scroll:focus-visible{outline:3px solid var(--wine-lit);outline-offset:3px}
+.ut-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.ut-table caption{
+  padding:17px 20px 0;text-align:left;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.14em;color:var(--bronze);text-transform:uppercase;
+}
+.ut-table th,.ut-table td{padding:11px 14px;text-align:right;white-space:nowrap}
+.ut-table th:first-child,.ut-table td:first-child{text-align:left}
+.ut-table thead th{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;font-weight:400;
+  color:var(--bronze);border-bottom:1px solid var(--line);
+}
+.ut-table tbody td{border-bottom:1px solid rgba(28,31,36,.06);font-variant-numeric:tabular-nums}
+.ut-table tbody th{
+  font-family:var(--display);font-size:13px;font-weight:400;
+  border-bottom:1px solid rgba(28,31,36,.06);
+}
+.ut-table tbody tr:last-child td,.ut-table tbody tr:last-child th{border-bottom:0}
+.ut-table tfoot td,.ut-table tfoot th{
+  border-top:1px solid var(--line);font-weight:700;background:rgba(226,218,206,.4);
+}
+.ut-vr{margin-top:clamp(34px,5vw,56px)}
+.ut-vr h3{font-size:clamp(18px,2.4vw,23px);margin-bottom:8px}
+.ut-vr>p{color:var(--muted);font-size:14.5px;margin-bottom:20px;max-width:62ch}
+.vr-grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:860px){.vr-grid{grid-template-columns:1fr 1fr}}
+.vr-box{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--night)}
+.vr-box iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.vr-box figcaption{
+  padding:13px 17px;background:#fff;border-top:1px solid var(--line);
+  font-size:14px;font-weight:700;letter-spacing:-.02em;
+}
   border:1.5px dashed var(--line);border-radius:16px;padding:clamp(36px,6vw,64px) 28px;
   text-align:center;background:rgba(142,43,46,.03);
 }
@@ -729,16 +782,249 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     <div class="wrap">
       <p class="sec-eb reveal">UNIT</p>
       <h2 class="reveal d1">호실 안내</h2>
-      <p class="sec-lead reveal d2">오피스텔 1,095실로 공급됩니다.</p>
-      <div class="soon reveal d3">
-        <p class="n">COMING SOON</p>
-        <h3>평면도와 호실 구성은 공개 준비 중입니다</h3>
-        <p>타입별 전용면적, 평면도, 호실 배치는 아직 공개되지 않았습니다.<br>공개되는 대로 이 자리에 올라옵니다.</p>
-        <a class="info-tel" style="display:inline-block;padding:14px 30px;max-width:320px" href="tel:1555-1087">먼저 안내받기 1555-1087</a>
+      <p class="sec-lead reveal d2">이번 공급분은 B동 오피스텔 <span class="num">770</span>실입니다. 전용 24㎡부터 53㎡까지 6개 면적대, 20개 타입으로 구성됩니다.</p>
+
+      <div class="reveal d3">
+        <div class="ut-tabs" role="tablist" aria-label="전용면적대 선택">
+          <button type="button" class="ut-tab" role="tab" id="ut-t-24" aria-controls="ut-p-24" aria-selected="true" tabindex="0">24㎡ <span class="nb">(280실)</span></button>
+          <button type="button" class="ut-tab" role="tab" id="ut-t-28" aria-controls="ut-p-28" aria-selected="false" tabindex="-1">28㎡ <span class="nb">(334실)</span></button>
+          <button type="button" class="ut-tab" role="tab" id="ut-t-29" aria-controls="ut-p-29" aria-selected="false" tabindex="-1">29㎡ <span class="nb">(16실)</span></button>
+          <button type="button" class="ut-tab" role="tab" id="ut-t-45" aria-controls="ut-p-45" aria-selected="false" tabindex="-1">45㎡ <span class="nb">(66실)</span></button>
+          <button type="button" class="ut-tab" role="tab" id="ut-t-46" aria-controls="ut-p-46" aria-selected="false" tabindex="-1">46㎡ <span class="nb">(4실)</span></button>
+          <button type="button" class="ut-tab" role="tab" id="ut-t-53" aria-controls="ut-p-53" aria-selected="false" tabindex="-1">53㎡ <span class="nb">(70실)</span></button>
+        </div>
+        <div class="ut-grid" id="ut-p-24" role="tabpanel" aria-labelledby="ut-t-24">
+          <figure class="ut-card">
+            <img src="images/gd/type-24a.webp" alt="24A 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>24A</b>
+              <span class="u-n">160실</span>
+              <span class="u-a">전용 24.61㎡ · 약 7.4평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-24b.webp" alt="24B 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>24B</b>
+              <span class="u-n">104실</span>
+              <span class="u-a">전용 24.51㎡ · 약 7.4평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-24c.webp" alt="24C 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>24C</b>
+              <span class="u-n">8실</span>
+              <span class="u-a">전용 24.92㎡ · 약 7.5평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-24d.webp" alt="24D 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>24D</b>
+              <span class="u-n">8실</span>
+              <span class="u-a">전용 25.01㎡ · 약 7.6평</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="ut-grid" id="ut-p-28" role="tabpanel" aria-labelledby="ut-t-28" hidden>
+          <figure class="ut-card">
+            <img src="images/gd/type-28a.webp" alt="28A 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>28A</b>
+              <span class="u-n">160실</span>
+              <span class="u-a">전용 28.97㎡ · 약 8.8평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-28b.webp" alt="28B 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>28B</b>
+              <span class="u-n">104실</span>
+              <span class="u-a">전용 28.87㎡ · 약 8.7평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-28c.webp" alt="28C 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>28C</b>
+              <span class="u-n">40실</span>
+              <span class="u-a">전용 28.59㎡ · 약 8.6평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-28d.webp" alt="28D 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>28D</b>
+              <span class="u-n">26실</span>
+              <span class="u-a">전용 28.40㎡ · 약 8.6평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-28e.webp" alt="28E 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>28E</b>
+              <span class="u-n">2실</span>
+              <span class="u-a">전용 28.80㎡ · 약 8.7평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-28f.webp" alt="28F 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>28F</b>
+              <span class="u-n">2실</span>
+              <span class="u-a">전용 29.00㎡ · 약 8.8평</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="ut-grid" id="ut-p-29" role="tabpanel" aria-labelledby="ut-t-29" hidden>
+          <figure class="ut-card">
+            <img src="images/gd/type-29a.webp" alt="29A 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>29A</b>
+              <span class="u-n">8실</span>
+              <span class="u-a">전용 29.38㎡ · 약 8.9평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-29b.webp" alt="29B 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>29B</b>
+              <span class="u-n">8실</span>
+              <span class="u-a">전용 29.28㎡ · 약 8.9평</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="ut-grid" id="ut-p-45" role="tabpanel" aria-labelledby="ut-t-45" hidden>
+          <figure class="ut-card">
+            <img src="images/gd/type-45a.webp" alt="45A 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>45A</b>
+              <span class="u-n">40실</span>
+              <span class="u-a">전용 45.78㎡ · 약 13.8평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-45b.webp" alt="45B 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>45B</b>
+              <span class="u-n">26실</span>
+              <span class="u-a">전용 45.66㎡ · 약 13.8평</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="ut-grid" id="ut-p-46" role="tabpanel" aria-labelledby="ut-t-46" hidden>
+          <figure class="ut-card">
+            <img src="images/gd/type-46a.webp" alt="46A 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>46A</b>
+              <span class="u-n">2실</span>
+              <span class="u-a">전용 46.18㎡ · 약 14.0평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-46b.webp" alt="46B 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>46B</b>
+              <span class="u-n">2실</span>
+              <span class="u-a">전용 46.06㎡ · 약 13.9평</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="ut-grid" id="ut-p-53" role="tabpanel" aria-labelledby="ut-t-53" hidden>
+          <figure class="ut-card">
+            <img src="images/gd/type-53a.webp" alt="53A 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>53A</b>
+              <span class="u-n">40실</span>
+              <span class="u-a">전용 53.57㎡ · 약 16.2평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-53b.webp" alt="53B 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>53B</b>
+              <span class="u-n">26실</span>
+              <span class="u-a">전용 53.45㎡ · 약 16.2평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-53c.webp" alt="53C 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>53C</b>
+              <span class="u-n">2실</span>
+              <span class="u-a">전용 53.85㎡ · 약 16.3평</span>
+            </figcaption>
+          </figure>
+          <figure class="ut-card">
+            <img src="images/gd/type-53d.webp" alt="53D 타입 평면도" loading="lazy" width="1100" height="1740">
+            <figcaption>
+              <b>53D</b>
+              <span class="u-n">2실</span>
+              <span class="u-a">전용 53.97㎡ · 약 16.3평</span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
-      <dl class="spec reveal" style="margin-top:28px">
+
+      <div class="ut-scroll reveal" tabindex="0" role="region" aria-label="타입별 면적표 (가로 스크롤)">
+        <table class="ut-table">
+          <caption>타입별 면적 (단위: ㎡)</caption>
+          <thead>
+            <tr>
+              <th scope="col">타입</th><th scope="col">실수</th><th scope="col">전용면적</th>
+              <th scope="col">공용면적</th><th scope="col">기타공용</th>
+              <th scope="col">계약면적</th><th scope="col">대지지분</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">24A</th><td>160</td><td>24.6107</td><td>17.9460</td><td>24.9610</td><td>67.5177</td><td>5.4437</td></tr>
+            <tr><th scope="row">24B</th><td>104</td><td>24.5135</td><td>17.9867</td><td>24.8625</td><td>67.3627</td><td>5.4222</td></tr>
+            <tr><th scope="row">24C</th><td>8</td><td>24.9177</td><td>17.8174</td><td>25.2723</td><td>68.0074</td><td>5.5116</td></tr>
+            <tr><th scope="row">24D</th><td>8</td><td>25.0149</td><td>17.7766</td><td>25.3710</td><td>68.1625</td><td>5.5331</td></tr>
+            <tr><th scope="row">28A</th><td>160</td><td>28.9709</td><td>20.7344</td><td>29.3834</td><td>79.0887</td><td>6.4081</td></tr>
+            <tr><th scope="row">28B</th><td>104</td><td>28.8737</td><td>20.7752</td><td>29.2847</td><td>78.9336</td><td>6.3865</td></tr>
+            <tr><th scope="row">28C</th><td>40</td><td>28.5943</td><td>20.9360</td><td>29.0014</td><td>78.5317</td><td>6.3248</td></tr>
+            <tr><th scope="row">28D</th><td>26</td><td>28.3999</td><td>21.0175</td><td>28.8043</td><td>78.2217</td><td>6.2818</td></tr>
+            <tr><th scope="row">28E</th><td>2</td><td>28.8041</td><td>20.8481</td><td>29.2141</td><td>78.8663</td><td>6.3712</td></tr>
+            <tr><th scope="row">28F</th><td>2</td><td>28.9985</td><td>20.7667</td><td>29.4112</td><td>79.1764</td><td>6.4142</td></tr>
+            <tr><th scope="row">29A</th><td>8</td><td>29.3751</td><td>20.5650</td><td>29.7931</td><td>79.7332</td><td>6.4975</td></tr>
+            <tr><th scope="row">29B</th><td>8</td><td>29.2779</td><td>20.6059</td><td>29.6945</td><td>79.5783</td><td>6.4760</td></tr>
+            <tr><th scope="row">45A</th><td>40</td><td>45.7804</td><td>31.1993</td><td>46.4317</td><td>123.4114</td><td>10.1261</td></tr>
+            <tr><th scope="row">45B</th><td>26</td><td>45.6604</td><td>31.2495</td><td>46.3104</td><td>123.2203</td><td>10.0996</td></tr>
+            <tr><th scope="row">46A</th><td>2</td><td>46.1846</td><td>31.0299</td><td>46.8419</td><td>124.0564</td><td>10.2155</td></tr>
+            <tr><th scope="row">46B</th><td>2</td><td>46.0646</td><td>31.0802</td><td>46.7203</td><td>123.8651</td><td>10.1890</td></tr>
+            <tr><th scope="row">53A</th><td>40</td><td>53.5700</td><td>35.9962</td><td>54.3322</td><td>143.8984</td><td>11.8491</td></tr>
+            <tr><th scope="row">53B</th><td>26</td><td>53.4500</td><td>36.0465</td><td>54.2109</td><td>143.7074</td><td>11.8226</td></tr>
+            <tr><th scope="row">53C</th><td>2</td><td>53.8542</td><td>35.8771</td><td>54.6206</td><td>144.3519</td><td>11.9120</td></tr>
+            <tr><th scope="row">53D</th><td>2</td><td>53.9742</td><td>35.8268</td><td>54.7421</td><td>144.5431</td><td>11.9385</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><th scope="row">합계</th><td>770</td><td colspan="5"></td></tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="tx-note reveal" style="color:var(--muted)">※ 면적은 시행사 공식 홈페이지 평면정보 표기 기준이며, 소수점 이하는 실제 시공 시 일부 변경될 수 있습니다. 평면은 견본주택과 반전될 수 있습니다. 1평 = 3.3058㎡.</p>
+
+      <div class="ut-vr reveal">
+        <h3>E-모델하우스</h3>
+        <p>시행사가 제공하는 360° VR입니다. 화면 안에서 끌어 둘러보세요. 24㎡A, 28㎡A 두 타입이 공개되어 있습니다.</p>
+        <div class="vr-grid">
+          <figure class="vr-box">
+            <iframe src="https://www.gdmetro.com/vr2/tour.html" title="24㎡A 360도 E-모델하우스" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
+            <figcaption>24㎡A · 360° 둘러보기</figcaption>
+          </figure>
+          <figure class="vr-box">
+            <iframe src="https://www.gdmetro.com/vr2/tour2.html" title="28㎡A 360도 E-모델하우스" loading="lazy" allow="fullscreen; accelerometer; gyroscope" allowfullscreen></iframe>
+            <figcaption>28㎡A · 360° 둘러보기</figcaption>
+          </figure>
+        </div>
+        <p class="tx-note" style="color:var(--muted)">※ E-모델하우스는 시행사 공식 홈페이지(gdmetro.com)에서 제공하는 자료입니다.</p>
+      </div>
+
+      <dl class="spec reveal" style="margin-top:clamp(34px,5vw,56px)">
         <div><dt>공급 유형</dt><dd>오피스텔</dd></div>
-        <div><dt>총 실수</dt><dd><span class="num">1,095</span>실</dd></div>
+        <div><dt>이번 공급분</dt><dd>B동 <span class="num">770</span>실</dd></div>
         <div><dt>동 구성</dt><dd>트윈타워 <span class="num">2</span>개동</dd></div>
         <div><dt>분양가</dt><dd><a href="tel:1555-1087" style="color:var(--wine);text-decoration:none">문의 <span class="num">1555-1087</span></a></dd></div>
       </dl>
@@ -771,7 +1057,7 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
       <div class="faq reveal d2" style="margin-top:26px">
         <details><summary>GD 메트로타워는 어디에 있습니까?</summary><div class="a">서울특별시 영등포구 대림2동 1104-1번지 외 4필지입니다. 2호선 구로디지털단지역과 직통연결되며, 2·7호선 대림역과 7호선 남구로역도 가깝습니다.</div></details>
         <details><summary>규모가 어떻게 됩니까?</summary><div class="a">지하 7층~지상 40층 트윈타워이며 오피스텔 1,095실입니다. 최고높이는 143.95m, 연면적은 138,697.1712㎡입니다.</div></details>
-        <details><summary>아파트입니까, 오피스텔입니까?</summary><div class="a">오피스텔입니다. 총 1,095실로 공급됩니다.</div></details>
+        <details><summary>아파트입니까, 오피스텔입니까?</summary><div class="a">오피스텔입니다. 이번 공급분은 B동 770실이며, 전용 24㎡·28㎡·29㎡·45㎡·46㎡·53㎡ 6개 면적대 20개 타입으로 구성됩니다.</div></details>
         <details><summary>청약 일정이 어떻게 됩니까?</summary><div class="a">견본주택은 10월 23일(금) 오픈하며, 청약 접수는 10월 27일(화)부터 28일(수)까지입니다. 당첨자 발표는 11월 2일(월), 정당계약은 11월 5일(목)부터 7일(토)까지입니다.</div></details>
         <details><summary>분양가는 얼마입니까?</summary><div class="a">분양가는 동·층·향·타입별로 차등 적용됩니다. 입주자모집공고 기준 전용 24타입의 공급금액은 약 3.4억~4.1억원(VAT 포함)이며, 계약금은 공급금액의 10%로 약 3,400만~4,100만원입니다. 다른 타입의 확정 금액은 1555-1087로 문의해 주시기 바랍니다.</div></details>
         <details><summary>정당계약 이후 계약은 어떻게 진행됩니까?</summary><div class="a">정당계약(11월 5일~7일) 이후에는 선착순 계약으로 진행할 예정입니다. 남은 호실 현황은 1555-1087로 문의하시면 안내드립니다.</div></details>
@@ -1039,6 +1325,28 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     }, { threshold:.4 });
     ob.observe(el);
     setTimeout(function(){ if (!done && inView(el)) { ob.disconnect(); run(); } }, 700);
+  });
+
+
+  /* ── 호실 타입 탭 ── */
+  var utTabs = $$('.ut-tab');
+  function utSelect(tab){
+    utTabs.forEach(function(t){
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  utTabs.forEach(function(tab, i){
+    tab.addEventListener('click', function(){ utSelect(tab); });
+    tab.addEventListener('keydown', function(e){
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var next = utTabs[(i + d + utTabs.length) % utTabs.length];
+      utSelect(next); next.focus();
+    });
   });
 
   /* ── 시그니처: 다이렉트 라인 ── */
