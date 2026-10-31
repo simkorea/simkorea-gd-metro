@@ -356,27 +356,42 @@ p{margin:0}
 }
 
 /* ── 호실 타입 ── */
-.ut-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.ut-tabs{display:flex;flex-wrap:wrap;gap:8px}
 .ut-tab{
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;line-height:1;
-  padding:12px 19px;border:1px solid var(--line);border-radius:999px;
+  font-family:var(--mono);font-size:13px;letter-spacing:.06em;line-height:1;
+  padding:13px 22px;border:1px solid var(--line);border-radius:999px;
   background:#fff;color:var(--muted);cursor:pointer;
   transition:background .2s,color .2s,border-color .2s;
 }
 .ut-tab:hover{border-color:var(--wine);color:var(--wine)}
 .ut-tab[aria-selected="true"]{background:var(--wine);border-color:var(--wine);color:var(--cream)}
-.ut-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
-.ut-grid[hidden]{display:none}
-.ut-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-.ut-card img{width:100%;height:auto}
-.ut-card figcaption{padding:15px 17px 17px;border-top:1px solid var(--line)}
-.ut-card b{display:block;font-family:var(--display);font-size:20px;letter-spacing:.01em}
-.ut-card .u-n{
-  display:inline-block;margin-top:7px;font-family:var(--mono);font-size:10.5px;
-  letter-spacing:.1em;color:var(--wine);background:rgba(104,0,1,.07);
-  padding:4px 9px;border-radius:999px;
+.ut-pane[hidden],.ut-plan[hidden]{display:none}
+.ut-subtabs{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 24px}
+.ut-sub{
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;line-height:1;
+  padding:11px 17px;border:1px solid var(--line);border-radius:8px;
+  background:rgba(226,218,206,.35);color:var(--muted);cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;
 }
-.ut-card .u-a{display:block;margin-top:9px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.ut-sub:hover{border-color:var(--bronze);color:var(--ink)}
+.ut-sub[aria-selected="true"]{background:var(--night);border-color:var(--night);color:var(--cream)}
+.ut-zoom{
+  display:block;position:relative;width:100%;max-width:780px;margin-inline:auto;padding:0;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;
+  cursor:zoom-in;font:inherit;color:inherit;
+}
+.ut-zoom img{width:100%;height:auto}
+.ut-zoom .ztag{
+  position:absolute;right:13px;top:13px;display:flex;align-items:center;gap:6px;
+  background:rgba(28,31,36,.84);color:var(--cream);
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:8px 13px;border-radius:999px;
+}
+.ut-zoom:hover .ztag{background:var(--wine)}
+.ut-cap{
+  max-width:780px;margin:15px auto 0;text-align:center;
+  font-size:13.5px;color:var(--muted);line-height:1.7;word-break:keep-all;
+}
+.ut-cap b{font-family:var(--display);font-size:17px;color:var(--ink);margin-right:8px}
 .ut-scroll{overflow-x:auto;margin-top:clamp(30px,4vw,44px);border:1px solid var(--line);border-radius:14px;background:#fff}
 .ut-scroll:focus-visible{outline:3px solid var(--wine-lit);outline-offset:3px}
 .ut-table{width:100%;border-collapse:collapse;font-size:13.5px}
@@ -410,12 +425,22 @@ p{margin:0}
   padding:13px 17px;background:#fff;border-top:1px solid var(--line);
   font-size:14px;font-weight:700;letter-spacing:-.02em;
 }
-  border:1.5px dashed var(--line);border-radius:16px;padding:clamp(36px,6vw,64px) 28px;
-  text-align:center;background:rgba(142,43,46,.03);
+
+/* ── 평면 확대 ── */
+.lb{position:fixed;inset:0;z-index:600;background:rgba(18,20,24,.94);display:none;overflow:auto}
+.lb.open{display:block}
+.lb img{display:block;width:1100px;max-width:none;margin:40px auto 60px;background:#fff}
+.lb-x{
+  position:fixed;top:14px;right:14px;z-index:601;width:46px;height:46px;
+  border:1px solid rgba(241,237,231,.3);border-radius:50%;background:rgba(28,31,36,.9);
+  color:var(--cream);font-size:22px;line-height:1;cursor:pointer;
 }
-.soon .n{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--bronze);margin-bottom:12px}
-.soon h3{font-size:clamp(19px,2.6vw,26px);margin-bottom:10px}
-.soon p{color:var(--muted);margin-bottom:22px;font-size:15px}
+.lb-x:hover{background:var(--wine);border-color:var(--wine)}
+.lb-hint{
+  position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:601;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+  color:rgba(241,237,231,.75);background:rgba(28,31,36,.9);padding:9px 16px;border-radius:999px;
+}
 
 /* ── 청약 일정 ── */
 .sched{display:grid;gap:10px;counter-reset:s}
@@ -786,184 +811,196 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
 
       <div class="reveal d3">
         <div class="ut-tabs" role="tablist" aria-label="전용면적대 선택">
-          <button type="button" class="ut-tab" role="tab" id="ut-t-24" aria-controls="ut-p-24" aria-selected="true" tabindex="0">24㎡ <span class="nb">(280실)</span></button>
-          <button type="button" class="ut-tab" role="tab" id="ut-t-28" aria-controls="ut-p-28" aria-selected="false" tabindex="-1">28㎡ <span class="nb">(334실)</span></button>
-          <button type="button" class="ut-tab" role="tab" id="ut-t-29" aria-controls="ut-p-29" aria-selected="false" tabindex="-1">29㎡ <span class="nb">(16실)</span></button>
-          <button type="button" class="ut-tab" role="tab" id="ut-t-45" aria-controls="ut-p-45" aria-selected="false" tabindex="-1">45㎡ <span class="nb">(66실)</span></button>
-          <button type="button" class="ut-tab" role="tab" id="ut-t-46" aria-controls="ut-p-46" aria-selected="false" tabindex="-1">46㎡ <span class="nb">(4실)</span></button>
-          <button type="button" class="ut-tab" role="tab" id="ut-t-53" aria-controls="ut-p-53" aria-selected="false" tabindex="-1">53㎡ <span class="nb">(70실)</span></button>
+          <button type="button" class="ut-tab" role="tab" id="g-24" aria-controls="gp-24" aria-selected="true" tabindex="0">24㎡</button>
+          <button type="button" class="ut-tab" role="tab" id="g-28" aria-controls="gp-28" aria-selected="false" tabindex="-1">28㎡</button>
+          <button type="button" class="ut-tab" role="tab" id="g-29" aria-controls="gp-29" aria-selected="false" tabindex="-1">29㎡</button>
+          <button type="button" class="ut-tab" role="tab" id="g-45" aria-controls="gp-45" aria-selected="false" tabindex="-1">45㎡</button>
+          <button type="button" class="ut-tab" role="tab" id="g-46" aria-controls="gp-46" aria-selected="false" tabindex="-1">46㎡</button>
+          <button type="button" class="ut-tab" role="tab" id="g-53" aria-controls="gp-53" aria-selected="false" tabindex="-1">53㎡</button>
         </div>
-        <div class="ut-grid" id="ut-p-24" role="tabpanel" aria-labelledby="ut-t-24">
-          <figure class="ut-card">
-            <img src="images/gd/type-24a.webp" alt="24A 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>24A</b>
-              <span class="u-n">160실</span>
-              <span class="u-a">전용 24.61㎡ · 약 7.4평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-24b.webp" alt="24B 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>24B</b>
-              <span class="u-n">104실</span>
-              <span class="u-a">전용 24.51㎡ · 약 7.4평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-24c.webp" alt="24C 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>24C</b>
-              <span class="u-n">8실</span>
-              <span class="u-a">전용 24.92㎡ · 약 7.5평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-24d.webp" alt="24D 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>24D</b>
-              <span class="u-n">8실</span>
-              <span class="u-a">전용 25.01㎡ · 약 7.6평</span>
-            </figcaption>
-          </figure>
+        <div class="ut-pane" id="gp-24" role="tabpanel" aria-labelledby="g-24">
+          <div class="ut-subtabs" role="tablist" aria-label="24㎡ 타입 선택">
+            <button type="button" class="ut-sub" role="tab" id="s-24a" aria-controls="sp-24a" aria-selected="true" tabindex="0">24㎡A</button>
+            <button type="button" class="ut-sub" role="tab" id="s-24b" aria-controls="sp-24b" aria-selected="false" tabindex="-1">24㎡B</button>
+            <button type="button" class="ut-sub" role="tab" id="s-24c" aria-controls="sp-24c" aria-selected="false" tabindex="-1">24㎡C</button>
+            <button type="button" class="ut-sub" role="tab" id="s-24d" aria-controls="sp-24d" aria-selected="false" tabindex="-1">24㎡D</button>
+          </div>
+          <div class="ut-plan" id="sp-24a" role="tabpanel" aria-labelledby="s-24a">
+            <button type="button" class="ut-zoom" data-src="images/gd/type-24a.webp" data-alt="24㎡A 타입 평면도 크게 보기">
+              <img src="images/gd/type-24a.webp" alt="24㎡A 타입 평면도 — 전용 24.6107㎡, 160실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>24㎡A</b> · 160실 · 전용 24.6107㎡(약 7.4평) · 공용 17.9460㎡ · 기타공용 24.9610㎡ · 계약 67.5177㎡(약 20.4평) · 대지지분 5.4437㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-24b" role="tabpanel" aria-labelledby="s-24b" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-24b.webp" data-alt="24㎡B 타입 평면도 크게 보기">
+              <img src="images/gd/type-24b.webp" alt="24㎡B 타입 평면도 — 전용 24.5135㎡, 104실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>24㎡B</b> · 104실 · 전용 24.5135㎡(약 7.4평) · 공용 17.9867㎡ · 기타공용 24.8625㎡ · 계약 67.3627㎡(약 20.4평) · 대지지분 5.4222㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-24c" role="tabpanel" aria-labelledby="s-24c" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-24c.webp" data-alt="24㎡C 타입 평면도 크게 보기">
+              <img src="images/gd/type-24c.webp" alt="24㎡C 타입 평면도 — 전용 24.9177㎡, 8실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>24㎡C</b> · 8실 · 전용 24.9177㎡(약 7.5평) · 공용 17.8174㎡ · 기타공용 25.2723㎡ · 계약 68.0074㎡(약 20.6평) · 대지지분 5.5116㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-24d" role="tabpanel" aria-labelledby="s-24d" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-24d.webp" data-alt="24㎡D 타입 평면도 크게 보기">
+              <img src="images/gd/type-24d.webp" alt="24㎡D 타입 평면도 — 전용 25.0149㎡, 8실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>24㎡D</b> · 8실 · 전용 25.0149㎡(약 7.6평) · 공용 17.7766㎡ · 기타공용 25.3710㎡ · 계약 68.1625㎡(약 20.6평) · 대지지분 5.5331㎡</p>
+          </div>
         </div>
-        <div class="ut-grid" id="ut-p-28" role="tabpanel" aria-labelledby="ut-t-28" hidden>
-          <figure class="ut-card">
-            <img src="images/gd/type-28a.webp" alt="28A 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>28A</b>
-              <span class="u-n">160실</span>
-              <span class="u-a">전용 28.97㎡ · 약 8.8평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-28b.webp" alt="28B 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>28B</b>
-              <span class="u-n">104실</span>
-              <span class="u-a">전용 28.87㎡ · 약 8.7평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-28c.webp" alt="28C 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>28C</b>
-              <span class="u-n">40실</span>
-              <span class="u-a">전용 28.59㎡ · 약 8.6평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-28d.webp" alt="28D 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>28D</b>
-              <span class="u-n">26실</span>
-              <span class="u-a">전용 28.40㎡ · 약 8.6평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-28e.webp" alt="28E 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>28E</b>
-              <span class="u-n">2실</span>
-              <span class="u-a">전용 28.80㎡ · 약 8.7평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-28f.webp" alt="28F 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>28F</b>
-              <span class="u-n">2실</span>
-              <span class="u-a">전용 29.00㎡ · 약 8.8평</span>
-            </figcaption>
-          </figure>
+        <div class="ut-pane" id="gp-28" role="tabpanel" aria-labelledby="g-28" hidden>
+          <div class="ut-subtabs" role="tablist" aria-label="28㎡ 타입 선택">
+            <button type="button" class="ut-sub" role="tab" id="s-28a" aria-controls="sp-28a" aria-selected="true" tabindex="0">28㎡A</button>
+            <button type="button" class="ut-sub" role="tab" id="s-28b" aria-controls="sp-28b" aria-selected="false" tabindex="-1">28㎡B</button>
+            <button type="button" class="ut-sub" role="tab" id="s-28c" aria-controls="sp-28c" aria-selected="false" tabindex="-1">28㎡C</button>
+            <button type="button" class="ut-sub" role="tab" id="s-28d" aria-controls="sp-28d" aria-selected="false" tabindex="-1">28㎡D</button>
+            <button type="button" class="ut-sub" role="tab" id="s-28e" aria-controls="sp-28e" aria-selected="false" tabindex="-1">28㎡E</button>
+            <button type="button" class="ut-sub" role="tab" id="s-28f" aria-controls="sp-28f" aria-selected="false" tabindex="-1">28㎡F</button>
+          </div>
+          <div class="ut-plan" id="sp-28a" role="tabpanel" aria-labelledby="s-28a">
+            <button type="button" class="ut-zoom" data-src="images/gd/type-28a.webp" data-alt="28㎡A 타입 평면도 크게 보기">
+              <img src="images/gd/type-28a.webp" alt="28㎡A 타입 평면도 — 전용 28.9709㎡, 160실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>28㎡A</b> · 160실 · 전용 28.9709㎡(약 8.8평) · 공용 20.7344㎡ · 기타공용 29.3834㎡ · 계약 79.0887㎡(약 23.9평) · 대지지분 6.4081㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-28b" role="tabpanel" aria-labelledby="s-28b" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-28b.webp" data-alt="28㎡B 타입 평면도 크게 보기">
+              <img src="images/gd/type-28b.webp" alt="28㎡B 타입 평면도 — 전용 28.8737㎡, 104실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>28㎡B</b> · 104실 · 전용 28.8737㎡(약 8.7평) · 공용 20.7752㎡ · 기타공용 29.2847㎡ · 계약 78.9336㎡(약 23.9평) · 대지지분 6.3865㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-28c" role="tabpanel" aria-labelledby="s-28c" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-28c.webp" data-alt="28㎡C 타입 평면도 크게 보기">
+              <img src="images/gd/type-28c.webp" alt="28㎡C 타입 평면도 — 전용 28.5943㎡, 40실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>28㎡C</b> · 40실 · 전용 28.5943㎡(약 8.6평) · 공용 20.9360㎡ · 기타공용 29.0014㎡ · 계약 78.5317㎡(약 23.8평) · 대지지분 6.3248㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-28d" role="tabpanel" aria-labelledby="s-28d" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-28d.webp" data-alt="28㎡D 타입 평면도 크게 보기">
+              <img src="images/gd/type-28d.webp" alt="28㎡D 타입 평면도 — 전용 28.3999㎡, 26실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>28㎡D</b> · 26실 · 전용 28.3999㎡(약 8.6평) · 공용 21.0175㎡ · 기타공용 28.8043㎡ · 계약 78.2217㎡(약 23.7평) · 대지지분 6.2818㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-28e" role="tabpanel" aria-labelledby="s-28e" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-28e.webp" data-alt="28㎡E 타입 평면도 크게 보기">
+              <img src="images/gd/type-28e.webp" alt="28㎡E 타입 평면도 — 전용 28.8041㎡, 2실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>28㎡E</b> · 2실 · 전용 28.8041㎡(약 8.7평) · 공용 20.8481㎡ · 기타공용 29.2141㎡ · 계약 78.8663㎡(약 23.9평) · 대지지분 6.3712㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-28f" role="tabpanel" aria-labelledby="s-28f" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-28f.webp" data-alt="28㎡F 타입 평면도 크게 보기">
+              <img src="images/gd/type-28f.webp" alt="28㎡F 타입 평면도 — 전용 28.9985㎡, 2실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>28㎡F</b> · 2실 · 전용 28.9985㎡(약 8.8평) · 공용 20.7667㎡ · 기타공용 29.4112㎡ · 계약 79.1764㎡(약 24.0평) · 대지지분 6.4142㎡</p>
+          </div>
         </div>
-        <div class="ut-grid" id="ut-p-29" role="tabpanel" aria-labelledby="ut-t-29" hidden>
-          <figure class="ut-card">
-            <img src="images/gd/type-29a.webp" alt="29A 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>29A</b>
-              <span class="u-n">8실</span>
-              <span class="u-a">전용 29.38㎡ · 약 8.9평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-29b.webp" alt="29B 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>29B</b>
-              <span class="u-n">8실</span>
-              <span class="u-a">전용 29.28㎡ · 약 8.9평</span>
-            </figcaption>
-          </figure>
+        <div class="ut-pane" id="gp-29" role="tabpanel" aria-labelledby="g-29" hidden>
+          <div class="ut-subtabs" role="tablist" aria-label="29㎡ 타입 선택">
+            <button type="button" class="ut-sub" role="tab" id="s-29a" aria-controls="sp-29a" aria-selected="true" tabindex="0">29㎡A</button>
+            <button type="button" class="ut-sub" role="tab" id="s-29b" aria-controls="sp-29b" aria-selected="false" tabindex="-1">29㎡B</button>
+          </div>
+          <div class="ut-plan" id="sp-29a" role="tabpanel" aria-labelledby="s-29a">
+            <button type="button" class="ut-zoom" data-src="images/gd/type-29a.webp" data-alt="29㎡A 타입 평면도 크게 보기">
+              <img src="images/gd/type-29a.webp" alt="29㎡A 타입 평면도 — 전용 29.3751㎡, 8실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>29㎡A</b> · 8실 · 전용 29.3751㎡(약 8.9평) · 공용 20.5650㎡ · 기타공용 29.7931㎡ · 계약 79.7332㎡(약 24.1평) · 대지지분 6.4975㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-29b" role="tabpanel" aria-labelledby="s-29b" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-29b.webp" data-alt="29㎡B 타입 평면도 크게 보기">
+              <img src="images/gd/type-29b.webp" alt="29㎡B 타입 평면도 — 전용 29.2779㎡, 8실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>29㎡B</b> · 8실 · 전용 29.2779㎡(약 8.9평) · 공용 20.6059㎡ · 기타공용 29.6945㎡ · 계약 79.5783㎡(약 24.1평) · 대지지분 6.4760㎡</p>
+          </div>
         </div>
-        <div class="ut-grid" id="ut-p-45" role="tabpanel" aria-labelledby="ut-t-45" hidden>
-          <figure class="ut-card">
-            <img src="images/gd/type-45a.webp" alt="45A 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>45A</b>
-              <span class="u-n">40실</span>
-              <span class="u-a">전용 45.78㎡ · 약 13.8평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-45b.webp" alt="45B 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>45B</b>
-              <span class="u-n">26실</span>
-              <span class="u-a">전용 45.66㎡ · 약 13.8평</span>
-            </figcaption>
-          </figure>
+        <div class="ut-pane" id="gp-45" role="tabpanel" aria-labelledby="g-45" hidden>
+          <div class="ut-subtabs" role="tablist" aria-label="45㎡ 타입 선택">
+            <button type="button" class="ut-sub" role="tab" id="s-45a" aria-controls="sp-45a" aria-selected="true" tabindex="0">45㎡A</button>
+            <button type="button" class="ut-sub" role="tab" id="s-45b" aria-controls="sp-45b" aria-selected="false" tabindex="-1">45㎡B</button>
+          </div>
+          <div class="ut-plan" id="sp-45a" role="tabpanel" aria-labelledby="s-45a">
+            <button type="button" class="ut-zoom" data-src="images/gd/type-45a.webp" data-alt="45㎡A 타입 평면도 크게 보기">
+              <img src="images/gd/type-45a.webp" alt="45㎡A 타입 평면도 — 전용 45.7804㎡, 40실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>45㎡A</b> · 40실 · 전용 45.7804㎡(약 13.8평) · 공용 31.1993㎡ · 기타공용 46.4317㎡ · 계약 123.4114㎡(약 37.3평) · 대지지분 10.1261㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-45b" role="tabpanel" aria-labelledby="s-45b" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-45b.webp" data-alt="45㎡B 타입 평면도 크게 보기">
+              <img src="images/gd/type-45b.webp" alt="45㎡B 타입 평면도 — 전용 45.6604㎡, 26실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>45㎡B</b> · 26실 · 전용 45.6604㎡(약 13.8평) · 공용 31.2495㎡ · 기타공용 46.3104㎡ · 계약 123.2203㎡(약 37.3평) · 대지지분 10.0996㎡</p>
+          </div>
         </div>
-        <div class="ut-grid" id="ut-p-46" role="tabpanel" aria-labelledby="ut-t-46" hidden>
-          <figure class="ut-card">
-            <img src="images/gd/type-46a.webp" alt="46A 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>46A</b>
-              <span class="u-n">2실</span>
-              <span class="u-a">전용 46.18㎡ · 약 14.0평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-46b.webp" alt="46B 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>46B</b>
-              <span class="u-n">2실</span>
-              <span class="u-a">전용 46.06㎡ · 약 13.9평</span>
-            </figcaption>
-          </figure>
+        <div class="ut-pane" id="gp-46" role="tabpanel" aria-labelledby="g-46" hidden>
+          <div class="ut-subtabs" role="tablist" aria-label="46㎡ 타입 선택">
+            <button type="button" class="ut-sub" role="tab" id="s-46a" aria-controls="sp-46a" aria-selected="true" tabindex="0">46㎡A</button>
+            <button type="button" class="ut-sub" role="tab" id="s-46b" aria-controls="sp-46b" aria-selected="false" tabindex="-1">46㎡B</button>
+          </div>
+          <div class="ut-plan" id="sp-46a" role="tabpanel" aria-labelledby="s-46a">
+            <button type="button" class="ut-zoom" data-src="images/gd/type-46a.webp" data-alt="46㎡A 타입 평면도 크게 보기">
+              <img src="images/gd/type-46a.webp" alt="46㎡A 타입 평면도 — 전용 46.1846㎡, 2실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>46㎡A</b> · 2실 · 전용 46.1846㎡(약 14.0평) · 공용 31.0299㎡ · 기타공용 46.8419㎡ · 계약 124.0564㎡(약 37.5평) · 대지지분 10.2155㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-46b" role="tabpanel" aria-labelledby="s-46b" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-46b.webp" data-alt="46㎡B 타입 평면도 크게 보기">
+              <img src="images/gd/type-46b.webp" alt="46㎡B 타입 평면도 — 전용 46.0646㎡, 2실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>46㎡B</b> · 2실 · 전용 46.0646㎡(약 13.9평) · 공용 31.0802㎡ · 기타공용 46.7203㎡ · 계약 123.8651㎡(약 37.5평) · 대지지분 10.1890㎡</p>
+          </div>
         </div>
-        <div class="ut-grid" id="ut-p-53" role="tabpanel" aria-labelledby="ut-t-53" hidden>
-          <figure class="ut-card">
-            <img src="images/gd/type-53a.webp" alt="53A 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>53A</b>
-              <span class="u-n">40실</span>
-              <span class="u-a">전용 53.57㎡ · 약 16.2평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-53b.webp" alt="53B 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>53B</b>
-              <span class="u-n">26실</span>
-              <span class="u-a">전용 53.45㎡ · 약 16.2평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-53c.webp" alt="53C 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>53C</b>
-              <span class="u-n">2실</span>
-              <span class="u-a">전용 53.85㎡ · 약 16.3평</span>
-            </figcaption>
-          </figure>
-          <figure class="ut-card">
-            <img src="images/gd/type-53d.webp" alt="53D 타입 평면도" loading="lazy" width="1100" height="1740">
-            <figcaption>
-              <b>53D</b>
-              <span class="u-n">2실</span>
-              <span class="u-a">전용 53.97㎡ · 약 16.3평</span>
-            </figcaption>
-          </figure>
+        <div class="ut-pane" id="gp-53" role="tabpanel" aria-labelledby="g-53" hidden>
+          <div class="ut-subtabs" role="tablist" aria-label="53㎡ 타입 선택">
+            <button type="button" class="ut-sub" role="tab" id="s-53a" aria-controls="sp-53a" aria-selected="true" tabindex="0">53㎡A</button>
+            <button type="button" class="ut-sub" role="tab" id="s-53b" aria-controls="sp-53b" aria-selected="false" tabindex="-1">53㎡B</button>
+            <button type="button" class="ut-sub" role="tab" id="s-53c" aria-controls="sp-53c" aria-selected="false" tabindex="-1">53㎡C</button>
+            <button type="button" class="ut-sub" role="tab" id="s-53d" aria-controls="sp-53d" aria-selected="false" tabindex="-1">53㎡D</button>
+          </div>
+          <div class="ut-plan" id="sp-53a" role="tabpanel" aria-labelledby="s-53a">
+            <button type="button" class="ut-zoom" data-src="images/gd/type-53a.webp" data-alt="53㎡A 타입 평면도 크게 보기">
+              <img src="images/gd/type-53a.webp" alt="53㎡A 타입 평면도 — 전용 53.5700㎡, 40실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>53㎡A</b> · 40실 · 전용 53.5700㎡(약 16.2평) · 공용 35.9962㎡ · 기타공용 54.3322㎡ · 계약 143.8984㎡(약 43.5평) · 대지지분 11.8491㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-53b" role="tabpanel" aria-labelledby="s-53b" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-53b.webp" data-alt="53㎡B 타입 평면도 크게 보기">
+              <img src="images/gd/type-53b.webp" alt="53㎡B 타입 평면도 — 전용 53.4500㎡, 26실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>53㎡B</b> · 26실 · 전용 53.4500㎡(약 16.2평) · 공용 36.0465㎡ · 기타공용 54.2109㎡ · 계약 143.7074㎡(약 43.5평) · 대지지분 11.8226㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-53c" role="tabpanel" aria-labelledby="s-53c" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-53c.webp" data-alt="53㎡C 타입 평면도 크게 보기">
+              <img src="images/gd/type-53c.webp" alt="53㎡C 타입 평면도 — 전용 53.8542㎡, 2실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>53㎡C</b> · 2실 · 전용 53.8542㎡(약 16.3평) · 공용 35.8771㎡ · 기타공용 54.6206㎡ · 계약 144.3519㎡(약 43.7평) · 대지지분 11.9120㎡</p>
+          </div>
+          <div class="ut-plan" id="sp-53d" role="tabpanel" aria-labelledby="s-53d" hidden>
+            <button type="button" class="ut-zoom" data-src="images/gd/type-53d.webp" data-alt="53㎡D 타입 평면도 크게 보기">
+              <img src="images/gd/type-53d.webp" alt="53㎡D 타입 평면도 — 전용 53.9742㎡, 2실" loading="lazy" width="1100" height="1740">
+              <span class="ztag" aria-hidden="true">＋ 크게 보기</span>
+            </button>
+            <p class="ut-cap"><b>53㎡D</b> · 2실 · 전용 53.9742㎡(약 16.3평) · 공용 35.8268㎡ · 기타공용 54.7421㎡ · 계약 144.5431㎡(약 43.7평) · 대지지분 11.9385㎡</p>
+          </div>
         </div>
       </div>
 
@@ -1033,6 +1070,12 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     </div>
   </div>
 </section>
+
+<div class="lb" id="planLb" role="dialog" aria-modal="true" aria-label="평면도 크게 보기">
+  <button type="button" class="lb-x" id="planLbX" aria-label="닫기">&times;</button>
+  <img id="planLbImg" src="" alt="">
+  <p class="lb-hint">끌어서 보기 · 바깥쪽 눌러 닫기</p>
+</div>
 
 <!-- ══ 5. 청약안내 ══ -->
 <section class="page" id="p-guide">
@@ -1329,25 +1372,59 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
   });
 
 
-  /* ── 호실 타입 탭 ── */
-  var utTabs = $$('.ut-tab');
-  function utSelect(tab){
-    utTabs.forEach(function(t){
-      var on = t === tab;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+  /* ── 호실 타입 2단 탭 ── */
+  function tabGroup(tabs){
+    function sel(tab){
+      tabs.forEach(function(t){
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+    }
+    tabs.forEach(function(tab, i){
+      tab.addEventListener('click', function(){ sel(tab); });
+      tab.addEventListener('keydown', function(e){
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var next = tabs[(i + d + tabs.length) % tabs.length];
+        sel(next); next.focus();
+      });
     });
   }
-  utTabs.forEach(function(tab, i){
-    tab.addEventListener('click', function(){ utSelect(tab); });
-    tab.addEventListener('keydown', function(e){
-      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-      if (!d) return;
-      e.preventDefault();
-      var next = utTabs[(i + d + utTabs.length) % utTabs.length];
-      utSelect(next); next.focus();
+  tabGroup($$('.ut-tab'));
+  $$('.ut-subtabs').forEach(function(list){
+    tabGroup([].slice.call(list.querySelectorAll('.ut-sub')));
+  });
+
+  /* ── 평면 확대 ── */
+  var planLb = $('#planLb'), planImg = $('#planLbImg'), planBack = null;
+  function closePlan(){
+    planLb.classList.remove('open');
+    planImg.src = ''; document.body.style.overflow = '';
+    if (planBack) planBack.focus();
+  }
+  $$('.ut-zoom').forEach(function(b){
+    b.addEventListener('click', function(){
+      planBack = b;
+      planImg.src = b.dataset.src;
+      planImg.alt = b.dataset.alt;
+      planLb.classList.add('open');
+      planLb.scrollTop = 0;
+      planLb.scrollLeft = Math.max(0, (planLb.scrollWidth - planLb.clientWidth) / 2);
+      document.body.style.overflow = 'hidden';
+      planImg.addEventListener('load', function once(){
+        planImg.removeEventListener('load', once);
+        planLb.scrollLeft = Math.max(0, (planLb.scrollWidth - planLb.clientWidth) / 2);
+      });
+      $('#planLbX').focus();
     });
+  });
+  $('#planLbX').addEventListener('click', closePlan);
+  planLb.addEventListener('click', function(e){ if (e.target !== planImg) closePlan(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && planLb.classList.contains('open')) closePlan();
   });
 
   /* ── 시그니처: 다이렉트 라인 ── */
