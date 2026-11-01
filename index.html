@@ -544,27 +544,6 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
   .cta .c2{background:var(--wine);color:var(--cream)}
 }
 
-/* ── 첫 화면 팝업 ── */
-.pw{position:fixed;inset:0;z-index:300;background:rgba(28,31,36,.72);display:grid;place-items:center;padding:20px}
-.pw[hidden]{display:none}
-.pw-in{background:var(--cream);border-radius:16px;max-width:380px;width:100%;overflow:hidden;position:relative}
-.pw-body{padding:30px 26px 22px;text-align:center}
-.pw-x{position:absolute;top:10px;right:12px;background:none;border:0;font-size:19px;color:var(--muted);cursor:pointer;padding:6px;line-height:1}
-.pw-eb{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--bronze);margin-bottom:9px}
-.pw-h{font-size:24px;margin-bottom:18px;letter-spacing:-.035em}
-.pw-h em{font-style:normal;color:var(--wine)}
-.pw-list{display:grid;gap:7px;text-align:left}
-.pw-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;background:#fff;border-radius:9px;padding:10px 14px}
-.pw-row b{font-family:var(--mono);font-size:15px;color:var(--wine);display:flex;align-items:baseline;gap:4px}
-.pw-row b small{font-size:9px;color:var(--bronze)}
-.pw-row span{font-size:13.5px;font-weight:600}
-.pw-tip{margin-top:14px;font-size:12px;color:var(--muted)}
-.pw-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-.pw-btns a{padding:15px;text-align:center;text-decoration:none;font-weight:700;font-size:15px}
-.pw-b1{background:var(--night);color:var(--cream)}
-.pw-b2{background:var(--wine);color:var(--cream)}
-.pw-foot{display:flex;align-items:center;gap:8px;padding:11px 26px;background:var(--sand);font-size:12.5px;color:var(--muted)}
-.pw-foot input{accent-color:var(--wine)}
 
 @media (max-width:1023px){
   .nav-menu{
@@ -1265,29 +1244,6 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
   <a class="c2" href="#contact">방문예약 신청</a>
 </div>
 
-<!-- ══ 첫 화면 팝업 ══ -->
-<div class="pw" id="pw" role="dialog" aria-modal="true" aria-labelledby="pwH" hidden>
-  <div class="pw-in" id="pwIn" tabindex="-1">
-    <div class="pw-body">
-      <button class="pw-x" type="button" id="pwX" aria-label="팝업 닫기">&#10005;</button>
-      <p class="pw-eb">GD METRO TOWER</p>
-      <h2 class="pw-h" id="pwH">견본주택 <em>오픈</em><br>청약 일정 안내</h2>
-      <div class="pw-list">
-        <div class="pw-row"><b>10.23<small>FRI</small></b><span>견본주택 오픈</span></div>
-        <div class="pw-row"><b>10.27<small>TUE</small></b><span>청약 접수 시작</span></div>
-        <div class="pw-row"><b>10.28<small>WED</small></b><span>청약 접수 마감</span></div>
-        <div class="pw-row"><b>11.02<small>MON</small></b><span>당첨자 발표</span></div>
-        <div class="pw-row"><b>11.05<small>THU</small></b><span>정당계약 시작</span></div>
-      </div>
-      <p class="pw-tip">방문 예약하시면 대기 없이 상담받으실 수 있습니다.</p>
-    </div>
-    <div class="pw-btns">
-      <a class="pw-b1" href="tel:1666-0753">전화상담</a>
-      <a class="pw-b2" href="#contact" id="pwGo">방문예약</a>
-    </div>
-    <label class="pw-foot"><input type="checkbox" id="pwToday"> 오늘 하루 열지 않기</label>
-  </div>
-</div>
 
 <script>
 (function(){
@@ -1577,26 +1533,6 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     });
   });
 
-  /* ── 첫 화면 팝업 ── */
-  var pw = $('#pw');
-  function closePw(){
-    pw.hidden = true;
-    if ($('#pwToday').checked){
-      try{ localStorage.setItem('gdm_pw', String(Date.now())); }catch(_e){}
-    }
-  }
-  var hide = false;
-  try{
-    var saved = localStorage.getItem('gdm_pw');
-    hide = saved && (Date.now() - Number(saved) < 864e5);
-  }catch(_e){}
-  if (!hide){
-    setTimeout(function(){ pw.hidden = false; $('#pwIn').focus(); }, 700);
-  }
-  $('#pwX').addEventListener('click', closePw);
-  $('#pwGo').addEventListener('click', closePw);
-  pw.addEventListener('click', function(e){ if (e.target === pw) closePw(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !pw.hidden) closePw(); });
 })();
 </script>
 
