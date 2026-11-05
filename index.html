@@ -356,6 +356,15 @@ p{margin:0}
   border:1px solid rgba(241,237,231,.22);color:rgba(241,237,231,.86);
 }
 
+/* ── 층고별 조망 ── */
+.vw-tabs{margin-bottom:20px}
+.ut-sub small{display:block;margin-top:3px;font-size:9.5px;letter-spacing:.06em;opacity:.75}
+.vw-panel[hidden]{display:none}
+.vw-stage{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--night)}
+.vw-stage video{display:block;width:100%;aspect-ratio:16/9;background:var(--night)}
+.vw-cap{margin-top:14px;text-align:center;font-size:13.5px;color:var(--muted);line-height:1.7;word-break:keep-all}
+.vw-cap b{font-family:var(--display);font-size:16px;color:var(--ink);margin-right:7px}
+
 /* ── 커뮤니티 ── */
 .cm-plan{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;max-width:900px;margin-inline:auto}
 .cm-plan img{width:100%;height:auto}
@@ -762,6 +771,98 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
         <img src="images/gd/map-area.jpg" alt="GD 메트로타워 주변 안내도 — 구로디지털단지역, 대림역, G밸리, 주변 생활시설" loading="lazy" width="1100" height="1138" style="border-radius:14px">
       </picture>
       <p class="tx-note reveal" style="color:var(--muted)">※ 안내도는 이해를 돕기 위한 것으로 실제와 다를 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="wrap">
+      <p class="sec-eb reveal">VIEW</p>
+      <h2 class="reveal d1">층이 올라갈수록<br>보이는 것이 달라집니다</h2>
+      <p class="sec-lead reveal d2">현장 상공에 드론을 띄워 5층부터 40층까지 높이별로 360° 담았습니다. 층을 눌러 비교해 보세요.</p>
+      <div class="reveal d3">
+        <div class="ut-subtabs vw-tabs" role="tablist" aria-label="조망 층수 선택">
+          <button type="button" class="ut-sub" role="tab" id="v-5" aria-controls="vp-5" aria-selected="true" tabindex="0">5층<small>24m</small></button>
+          <button type="button" class="ut-sub" role="tab" id="v-10" aria-controls="vp-10" aria-selected="false" tabindex="-1">10층<small>39m</small></button>
+          <button type="button" class="ut-sub" role="tab" id="v-15" aria-controls="vp-15" aria-selected="false" tabindex="-1">15층<small>56m</small></button>
+          <button type="button" class="ut-sub" role="tab" id="v-20" aria-controls="vp-20" aria-selected="false" tabindex="-1">20층<small>75m</small></button>
+          <button type="button" class="ut-sub" role="tab" id="v-25" aria-controls="vp-25" aria-selected="false" tabindex="-1">25층<small>92m</small></button>
+          <button type="button" class="ut-sub" role="tab" id="v-30" aria-controls="vp-30" aria-selected="false" tabindex="-1">30층<small>109m</small></button>
+          <button type="button" class="ut-sub" role="tab" id="v-35" aria-controls="vp-35" aria-selected="false" tabindex="-1">35층<small>125m</small></button>
+          <button type="button" class="ut-sub" role="tab" id="v-40" aria-controls="vp-40" aria-selected="false" tabindex="-1">40층<small>142m</small></button>
+        </div>
+        <div class="vw-panel" id="vp-5" role="tabpanel" aria-labelledby="v-5">
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-5f.webp" width="1280" height="720">
+              <source src="images/gd/view-5f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>5층</b>촬영 고도 약 24m · 360° 한 바퀴</p>
+        </div>
+        <div class="vw-panel" id="vp-10" role="tabpanel" aria-labelledby="v-10" hidden>
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-10f.webp" width="1280" height="720">
+              <source src="images/gd/view-10f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>10층</b>촬영 고도 약 39m · 360° 한 바퀴</p>
+        </div>
+        <div class="vw-panel" id="vp-15" role="tabpanel" aria-labelledby="v-15" hidden>
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-15f.webp" width="1280" height="720">
+              <source src="images/gd/view-15f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>15층</b>촬영 고도 약 56m · 360° 한 바퀴</p>
+        </div>
+        <div class="vw-panel" id="vp-20" role="tabpanel" aria-labelledby="v-20" hidden>
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-20f.webp" width="1280" height="720">
+              <source src="images/gd/view-20f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>20층</b>촬영 고도 약 75m · 360° 한 바퀴</p>
+        </div>
+        <div class="vw-panel" id="vp-25" role="tabpanel" aria-labelledby="v-25" hidden>
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-25f.webp" width="1280" height="720">
+              <source src="images/gd/view-25f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>25층</b>촬영 고도 약 92m · 360° 한 바퀴</p>
+        </div>
+        <div class="vw-panel" id="vp-30" role="tabpanel" aria-labelledby="v-30" hidden>
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-30f.webp" width="1280" height="720">
+              <source src="images/gd/view-30f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>30층</b>촬영 고도 약 109m · 360° 한 바퀴</p>
+        </div>
+        <div class="vw-panel" id="vp-35" role="tabpanel" aria-labelledby="v-35" hidden>
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-35f.webp" width="1280" height="720">
+              <source src="images/gd/view-35f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>35층</b>촬영 고도 약 125m · 360° 한 바퀴</p>
+        </div>
+        <div class="vw-panel" id="vp-40" role="tabpanel" aria-labelledby="v-40" hidden>
+          <div class="vw-stage">
+            <video controls playsinline preload="none" poster="images/gd/view-40f.webp" width="1280" height="720">
+              <source src="images/gd/view-40f.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+          </div>
+          <p class="vw-cap"><b>40층</b>촬영 고도 약 142m · 360° 한 바퀴</p>
+        </div>
+      </div>
+      <p class="tx-note reveal" style="color:var(--muted)">※ 건물 준공 전, 현장 상공에서 드론으로 촬영한 영상입니다. 실제 세대의 층·향·위치에 따라 조망은 달라지며, 주변 개발 상황에 따라 변경될 수 있습니다. 표기된 고도는 촬영 고도입니다.</p>
     </div>
   </div>
 </section>
