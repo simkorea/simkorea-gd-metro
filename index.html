@@ -356,12 +356,25 @@ p{margin:0}
   border:1px solid rgba(241,237,231,.22);color:rgba(241,237,231,.86);
 }
 
+/* ── 주변 둘러보기 ── */
+.nb-grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:640px){.nb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1000px){.nb-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.nb-cell{margin:0}
+.nb-cell video{
+  display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:12px;
+  border:1px solid var(--line);background:var(--night);
+}
+.nb-cell figcaption{margin-top:11px}
+.nb-cell b{display:block;font-size:14.5px;font-weight:800;letter-spacing:-.025em}
+.nb-cell span{display:block;margin-top:4px;font-size:12.5px;color:var(--muted);line-height:1.6;word-break:keep-all}
+
 /* ── 층고별 조망 ── */
 .vw-tabs{margin-bottom:20px}
 .ut-sub small{display:block;margin-top:3px;font-size:9.5px;letter-spacing:.06em;opacity:.75}
 .vw-panel[hidden]{display:none}
 .vw-stage{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--night)}
-.vw-stage video{display:block;width:100%;aspect-ratio:16/9;background:var(--night)}
+.vw-stage video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--night)}
 .vw-cap{margin-top:14px;text-align:center;font-size:13.5px;color:var(--muted);line-height:1.7;word-break:keep-all}
 .vw-cap b{font-family:var(--display);font-size:16px;color:var(--ink);margin-right:7px}
 
@@ -771,6 +784,72 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
         <img src="images/gd/map-area.jpg" alt="GD 메트로타워 주변 안내도 — 구로디지털단지역, 대림역, G밸리, 주변 생활시설" loading="lazy" width="1100" height="1138" style="border-radius:14px">
       </picture>
       <p class="tx-note reveal" style="color:var(--muted)">※ 안내도는 이해를 돕기 위한 것으로 실제와 다를 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="wrap">
+      <p class="sec-eb reveal">NEIGHBORHOOD</p>
+      <h2 class="reveal d1">주변 둘러보기</h2>
+      <p class="sec-lead reveal d2">현장 주변을 드론으로 담은 8편입니다. 역, 사업 부지, G밸리, 도로, 수변까지 직접 보시면 입지가 더 분명해집니다.</p>
+      <div class="nb-grid">
+          <figure class="nb-cell reveal d1">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-station.webp" width="720" height="405">
+              <source src="images/gd/nb-station.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>구로디지털단지역 일대</b><span>2호선 지상 구간과 역세권 주거지</span></figcaption>
+          </figure>
+          <figure class="nb-cell reveal d2">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-byc.webp" width="720" height="405">
+              <source src="images/gd/nb-byc.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>사업 부지 · 인근 초등학교</b><span>옛 BYC 본사 자리에 들어섭니다</span></figcaption>
+          </figure>
+          <figure class="nb-cell reveal d3">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-gvalley.webp" width="720" height="405">
+              <source src="images/gd/nb-gvalley.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>G밸리 중심부</b><span>서울디지털산업단지 밀집 구간</span></figcaption>
+          </figure>
+          <figure class="nb-cell reveal d4">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-gbiz.webp" width="720" height="405">
+              <source src="images/gd/nb-gbiz.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>G밸리 업무지구</b><span>오피스 블록이 모여 있는 배후수요</span></figcaption>
+          </figure>
+          <figure class="nb-cell reveal d1">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-guroic.webp" width="720" height="405">
+              <source src="images/gd/nb-guroic.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>구로IC</b><span>남부순환로로 이어지는 진출입</span></figcaption>
+          </figure>
+          <figure class="nb-cell reveal d2">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-seobu.webp" width="720" height="405">
+              <source src="images/gd/nb-seobu.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>서부간선도로</b><span>안양천을 따라 난 간선 도로</span></figcaption>
+          </figure>
+          <figure class="nb-cell reveal d3">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-anyang.webp" width="720" height="405">
+              <source src="images/gd/nb-anyang.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>안양천 · 수변</b><span>물길과 녹지가 이어지는 구간</span></figcaption>
+          </figure>
+          <figure class="nb-cell reveal d4">
+            <video controls loop muted playsinline preload="none" poster="images/gd/nb-hangang.webp" width="720" height="405">
+              <source src="images/gd/nb-hangang.mp4" type="video/mp4">
+              이 브라우저는 영상 재생을 지원하지 않습니다.
+            </video>
+            <figcaption><b>여의도 · 한강 방면</b><span>망원으로 당겨 본 여의도 업무지구</span></figcaption>
+          </figure>
+      </div>
+      <p class="tx-note reveal" style="color:var(--muted)">※ 현장 주변을 드론으로 촬영한 영상이며, 촬영 시점의 모습입니다. 주변 개발 상황에 따라 달라질 수 있습니다.</p>
     </div>
   </div>
   <div class="sec">
