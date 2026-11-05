@@ -356,6 +356,39 @@ p{margin:0}
   border:1px solid rgba(241,237,231,.22);color:rgba(241,237,231,.86);
 }
 
+/* ── 커뮤니티 ── */
+.cm-plan{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;max-width:900px;margin-inline:auto}
+.cm-plan img{width:100%;height:auto}
+.cm-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));margin-top:clamp(26px,3.5vw,40px)}
+.cm-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.cm-card img{width:100%;height:auto;aspect-ratio:380/208;object-fit:cover}
+.cm-card .in{padding:16px 18px 19px}
+.cm-card h4{margin:0;font-size:16px;font-weight:800;letter-spacing:-.025em;color:var(--wine)}
+.cm-card p{margin-top:7px;font-size:13.5px;line-height:1.7;color:var(--muted);word-break:keep-all}
+
+/* ── 홍보영상 ── */
+.flm{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:760px){.flm{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.flm-t{
+  display:block;width:100%;margin:0;padding:0;border:0;background:none;
+  font:inherit;color:inherit;text-align:left;cursor:pointer;
+}
+.flm-shot{display:block;position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:12px;background:var(--night)}
+.flm-t img{width:100%;height:100%;object-fit:cover;opacity:.9;transition:transform .7s var(--ease),opacity .35s}
+.flm-t:hover img{transform:scale(1.05);opacity:1}
+.flm-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:52px;height:52px;border-radius:50%;border:1px solid rgba(241,237,231,.75);
+  background:rgba(28,31,36,.45);display:grid;place-items:center;
+  transition:background .3s,border-color .3s,transform .3s;
+}
+.flm-t:hover .flm-play{background:var(--wine);border-color:var(--wine);transform:translate(-50%,-50%) scale(1.08)}
+.flm-play::after{content:"";width:0;height:0;border-left:12px solid var(--cream);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+.flm-t[data-played] .flm-play{display:none}
+.flm-shot iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.flm-cap{display:block;margin-top:12px;font-size:14px;font-weight:700;letter-spacing:-.02em;word-break:keep-all}
+.flm-sub{display:block;margin-top:4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--bronze)}
+
 /* ── 호실 타입 ── */
 .ut-tabs{display:flex;flex-wrap:wrap;gap:8px}
 .ut-tab{
@@ -648,6 +681,40 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
       </div>
     </div>
   </div>
+  <div class="sec">
+    <div class="wrap">
+      <p class="sec-eb reveal">FILM</p>
+      <h2 class="reveal d1">영상으로 먼저</h2>
+      <p class="sec-lead reveal d2">시행사가 공개한 공식 홍보영상 3편입니다. 누르면 바로 재생됩니다.</p>
+      <div class="flm">
+          <button type="button" class="flm-t reveal d1" data-kind="yt" data-vid="hxPSN2ZiRbE">
+            <span class="flm-shot">
+              <img src="images/gd/vid-brand.webp" alt="도시를 새롭게 만들 단 하나의 역사 홍보영상 썸네일" loading="lazy" width="960" height="540">
+              <span class="flm-play" aria-hidden="true"></span>
+            </span>
+            <span class="flm-cap">도시를 새롭게 만들 단 하나의 역사</span>
+            <span class="flm-sub">BRAND FILM</span>
+          </button>
+          <button type="button" class="flm-t reveal d2" data-kind="vm" data-vid="1237177334">
+            <span class="flm-shot">
+              <img src="images/gd/vid-tvcf.webp" alt="TV 광고 홍보영상 썸네일" loading="lazy" width="960" height="540">
+              <span class="flm-play" aria-hidden="true"></span>
+            </span>
+            <span class="flm-cap">TV 광고</span>
+            <span class="flm-sub">TV COMMERCIAL</span>
+          </button>
+          <button type="button" class="flm-t reveal d3" data-kind="vm" data-vid="1239391080">
+            <span class="flm-shot">
+              <img src="images/gd/vid-station.webp" alt="구로디지털단지역 직통연결 홍보영상 썸네일" loading="lazy" width="960" height="540">
+              <span class="flm-play" aria-hidden="true"></span>
+            </span>
+            <span class="flm-cap">구로디지털단지역 직통연결</span>
+            <span class="flm-sub">SHORT FILM</span>
+          </button>
+      </div>
+      <p class="imgcut reveal" style="color:var(--muted)">※ 영상은 시행사 공식 홈페이지(gdmetro.com)에서 제공하는 자료이며, 영상 속 전화번호는 시행사 대표번호입니다. 상담은 <a href="tel:1666-0753" style="color:var(--wine)">1666-0753</a>으로 연락해 주세요.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ══ 2. 입지환경 ══ -->
@@ -712,7 +779,7 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
           <div class="prem-txt">
             <p class="n">01 — ICON OF TRANSPORTATION</p>
             <h3>더 빠른 교통</h3>
-            <p>구로디지털단지역과 직통연결됩니다. 신안산선(공사중)과 남부순환로를 통해 서울 전역으로 이어집니다.</p>
+            <p>구로디지털단지역과 직통연결됩니다. 신안산선(예정)과 남부순환로를 통해 서울 전역으로 이어집니다.</p>
           </div>
           <div class="prem-pics">
             <img class="big" src="images/gd/prem-1.jpg" alt="교통 이미지컷" loading="lazy" width="860" height="813">
@@ -764,13 +831,7 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
           <div class="prem-txt">
             <p class="n">05 — ICON OF LIFE</p>
             <h3>더 많은 생활</h3>
-            <p>단지 내 커뮤니티 시설이 계획되어 있습니다.</p>
-            <div class="chips">
-              <span class="chip">피트니스</span><span class="chip">게스트하우스</span>
-              <span class="chip">실내골프연습장</span><span class="chip">북카페 · 작은도서관</span>
-              <span class="chip">코인세탁실</span><span class="chip">계절창고</span>
-            </div>
-            <p class="imgcut">※ 계절창고는 유료 선택사항입니다. 커뮤니티 구성은 변경될 수 있습니다.</p>
+            <p>피트니스, 게스트룸, 실내골프연습장, 북카페·작은 도서관, 코인세탁실, 세대창고가 단지 안에 계획되어 있습니다. 아래 커뮤니티에서 자세히 보실 수 있습니다.</p>
           </div>
           <div class="prem-pics">
             <img class="big" src="images/gd/prem-5.jpg" alt="커뮤니티 이미지컷" loading="lazy" width="860" height="813">
@@ -780,6 +841,43 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
         </div>
       </div>
       <p class="imgcut reveal">※ 위 사진은 모두 이미지컷으로, 실제와 다릅니다. 시설 구성은 인허가 및 설계 과정에서 변경될 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="wrap">
+      <p class="sec-eb reveal">COMMUNITY</p>
+      <h2 class="reveal d1">어반라이프를 완성하는<br>다양한 커뮤니티</h2>
+      <p class="sec-lead reveal d2">게스트룸부터 실내골프연습장, 피트니스, 북카페까지 단지 안에서 해결됩니다.</p>
+      <div class="cm-plan reveal d3">
+        <img src="images/gd/cm-plan.webp" alt="GD 메트로타워 커뮤니티 배치 CG — 게스트하우스, 피트니스, 실내골프연습장, 코인세탁실, 북카페·작은 도서관 위치" loading="lazy" width="990" height="925">
+      </div>
+      <div class="cm-grid">
+          <article class="cm-card reveal">
+            <img src="images/gd/cm-guest.webp" alt="게스트룸 이미지컷" loading="lazy" width="380" height="208">
+            <div class="in"><h4>게스트룸</h4><p>소중한 손님맞이부터 프라이빗 파티까지 누리는 독립형 숙소</p></div>
+          </article>
+          <article class="cm-card reveal">
+            <img src="images/gd/cm-storage.webp" alt="세대창고 이미지컷" loading="lazy" width="380" height="208">
+            <div class="in"><h4>세대창고</h4><p>부피 큰 짐을 여유롭게 수납해 주거 공간을 더 넓혀주는 전용 창고 (※ 일부 세대 제공)</p></div>
+          </article>
+          <article class="cm-card reveal">
+            <img src="images/gd/cm-golf.webp" alt="실내골프연습장 이미지컷" loading="lazy" width="380" height="208">
+            <div class="in"><h4>실내골프연습장</h4><p>날씨와 상관없이 필드의 실전 감각을 익히는 전용 골프 라운지</p></div>
+          </article>
+          <article class="cm-card reveal">
+            <img src="images/gd/cm-fitness.webp" alt="피트니스 이미지컷" loading="lazy" width="380" height="208">
+            <div class="in"><h4>피트니스</h4><p>최신 운동 기구로 활력 있는 하루를 여는 웰니스 공간</p></div>
+          </article>
+          <article class="cm-card reveal">
+            <img src="images/gd/cm-bookcafe.webp" alt="북카페/작은 도서관 이미지컷" loading="lazy" width="380" height="208">
+            <div class="in"><h4>북카페 · 작은 도서관</h4><p>독서와 휴식으로 일상에 영감을 채우는 힐링 문화공간</p></div>
+          </article>
+          <article class="cm-card reveal">
+            <img src="images/gd/cm-laundry.webp" alt="코인세탁실 이미지컷" loading="lazy" width="380" height="208">
+            <div class="in"><h4>코인세탁실</h4><p>대형 세탁물과 건조까지 간편하게 해결하는 원스톱 런드리 공간</p></div>
+          </article>
+      </div>
+      <p class="imgcut reveal" style="color:var(--muted)">※ 상기 CG와 사진은 모두 이미지컷으로 실제와 차이가 있을 수 있습니다. 커뮤니티 내 가구·운동기구의 기종, 브랜드, 수량, 디자인 및 배치는 실제와 다를 수 있으며 기타 집기류는 별도 제공되지 않습니다. 인허가 협의 결과에 따라 위치·동선·실내구획·마감재 등이 일부 변경될 수 있습니다. 계절창고는 유료 선택사항입니다.</p>
     </div>
   </div>
 </section>
@@ -1073,10 +1171,10 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
       <h2 class="reveal d1">청약 일정</h2>
       <p class="sec-lead reveal d2">시행사 공식 공지 기준입니다. 일정은 변경될 수 있으니 방문 전 확인해 주세요.</p>
       <div class="sched reveal d3">
-        <div class="sched-row now"><span class="sched-n"></span><span class="sched-t">견본주택 오픈</span><span class="sched-d">10월 23일 (금)</span></div>
+        <div class="sched-row"><span class="sched-n"></span><span class="sched-t">견본주택 오픈</span><span class="sched-d">10월 23일 (금)</span></div>
         <div class="sched-row"><span class="sched-n"></span><span class="sched-t">청약 접수</span><span class="sched-d">10월 27일 (화) ~ 28일 (수)</span></div>
         <div class="sched-row"><span class="sched-n"></span><span class="sched-t">당첨자 발표</span><span class="sched-d">11월 2일 (월)</span></div>
-        <div class="sched-row"><span class="sched-n"></span><span class="sched-t">정당계약</span><span class="sched-d">11월 5일 (목) ~ 7일 (토)</span></div>
+        <div class="sched-row now"><span class="sched-n"></span><span class="sched-t">정당계약</span><span class="sched-d">11월 5일 (목) ~ 7일 (토)</span></div>
       </div>
       <p class="tx-note reveal" style="color:var(--muted)">※ 청약 자격과 신청 방법은 입주자모집공고를 반드시 확인하시기 바랍니다.</p>
     </div>
@@ -1336,6 +1434,23 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     setTimeout(function(){ if (!done && inView(el)) { ob.disconnect(); run(); } }, 700);
   });
 
+
+
+  /* ── 홍보영상 파사드 ── */
+  $$('.flm-t').forEach(function(b){
+    b.addEventListener('click', function(){
+      if (b.dataset.played) return;
+      b.dataset.played = '1';
+      var f = document.createElement('iframe');
+      f.src = b.dataset.kind === 'yt'
+        ? 'https://www.youtube-nocookie.com/embed/' + b.dataset.vid + '?autoplay=1&rel=0'
+        : 'https://player.vimeo.com/video/' + b.dataset.vid + '?autoplay=1';
+      f.title = (b.querySelector('.flm-cap') || {}).textContent || '홍보영상';
+      f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      f.allowFullscreen = true;
+      b.querySelector('.flm-shot').appendChild(f);
+    });
+  });
 
   /* ── 호실 타입 2단 탭 ── */
   function tabGroup(tabs){
