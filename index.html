@@ -587,6 +587,55 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
 .ftr-note a{color:var(--sand);font-weight:700}
 .ftr-cr{margin-top:22px;font-size:12px;color:rgba(241,237,231,.55)}
 
+/* ── 첫 화면 팝업 ── */
+.pw{position:fixed;inset:0;z-index:300;background:rgba(28,31,36,.74);display:grid;place-items:center;padding:18px 14px}
+.pw[hidden]{display:none}
+.pw-in{
+  width:100%;max-width:400px;max-height:calc(100dvh - 36px);
+  display:flex;flex-direction:column;overflow:hidden;
+  background:#fff;border-radius:18px;box-shadow:0 24px 64px rgba(28,31,36,.4);
+}
+.pw-hd{position:relative;padding:26px 46px 24px;text-align:center;background:var(--cream);border-bottom:1px solid var(--line)}
+.pw-eb{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--wine);margin-bottom:14px}
+.pw-h{font-size:clamp(26px,7vw,31px);line-height:1.2;letter-spacing:-.04em;margin:0}
+.pw-h em{display:block;font-style:normal;color:var(--wine)}
+.pw-sub{margin-top:11px;font-size:13px;color:var(--muted);letter-spacing:-.01em}
+.pw-x{
+  position:absolute;top:14px;right:14px;width:36px;height:36px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:50%;color:var(--muted);
+  font-size:15px;line-height:1;cursor:pointer;transition:background-color .2s,color .2s;
+}
+.pw-x:hover{background:var(--wine);border-color:var(--wine);color:var(--cream)}
+.pw-bd{padding:20px 22px 22px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pw-lb{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--wine);text-align:center;margin-bottom:13px}
+.pw-card{border-radius:12px;padding:15px 16px;text-align:center;border:1.5px solid var(--line);background:#fff}
+.pw-card+.pw-card{margin-top:10px}
+.pw-card.hi{background:rgba(226,218,206,.5);border-color:var(--sand)}
+.pw-card b{display:block;font-size:clamp(19px,5.2vw,22px);font-weight:800;letter-spacing:-.035em}
+.pw-card.hi b{color:var(--ink)}
+.pw-card.lo b{color:var(--wine)}
+.pw-card span{display:block;margin-top:6px;font-size:12.5px;color:var(--muted);word-break:keep-all}
+.pw-go{
+  display:block;width:100%;margin-top:16px;padding:17px 12px;border:0;border-radius:12px;
+  background:var(--wine);color:var(--cream);font-family:inherit;font-size:17px;font-weight:800;
+  letter-spacing:-.03em;text-align:center;text-decoration:none;cursor:pointer;
+  transition:background-color .2s,transform .14s;
+}
+.pw-go:hover{background:var(--wine-lit)}
+.pw-go:active{transform:translateY(1px)}
+.pw-note{margin-top:13px;font-size:12px;color:var(--muted);text-align:center;word-break:keep-all}
+.pw-ft{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;background:var(--sand);border-top:1px solid var(--line)}
+.pw-ft button{
+  background:none;border:0;padding:6px 4px;font-family:inherit;font-size:13px;
+  color:var(--muted);cursor:pointer;transition:color .2s;
+}
+.pw-ft button:hover{color:var(--wine)}
+.pw-ft .pw-close{font-weight:700;color:var(--ink)}
+@media (max-width:360px){
+  .pw-hd{padding:22px 42px 20px}
+  .pw-bd{padding:17px 16px 18px}
+}
+
 /* ── 모바일 고정 CTA ── */
 .cta{display:none}
 @media (max-width:1023px){
@@ -1523,6 +1572,36 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
 </div>
 
 
+<!-- ══ 첫 화면 팝업 ══ -->
+<div class="pw" id="pw" role="dialog" aria-modal="true" aria-labelledby="pwH" hidden>
+  <div class="pw-in" id="pwIn">
+    <div class="pw-hd">
+      <button class="pw-x" type="button" id="pwX" aria-label="팝업 닫기">&#10005;</button>
+      <p class="pw-eb">GD메트로타워 &middot; 방문예약</p>
+      <h2 class="pw-h" id="pwH">선착순<em>동&middot;호 지정 중</em></h2>
+      <p class="pw-sub">구로디지털단지역 GD메트로타워</p>
+    </div>
+    <div class="pw-bd">
+      <p class="pw-lb">계약조건 안내</p>
+      <div class="pw-card hi">
+        <b>1차 계약금 500만 원</b>
+        <span>1룸&middot;1.5룸 기준 / 2룸 1,000만 원</span>
+      </div>
+      <div class="pw-card lo">
+        <b>중도금 60% 무이자</b>
+        <span>금융기관 대출 심사 및 공급조건 확인 필요</span>
+      </div>
+      <a class="pw-go" href="#contact" id="pwGo">방문예약 바로가기 &#8599;</a>
+      <p class="pw-note">타입&middot;층&middot;향에 따른 공급 상황은 상담 시 확인해 주세요.</p>
+    </div>
+    <div class="pw-ft">
+      <button type="button" id="pwToday">오늘 하루 보지 않기</button>
+      <button type="button" class="pw-close" id="pwClose">닫기 &#10005;</button>
+    </div>
+  </div>
+</div>
+
+
 <script>
 (function(){
   'use strict';
@@ -1826,6 +1905,39 @@ input::placeholder,textarea::placeholder{color:#A9A29B}
     .finally(function(){
       btn.disabled = false; btn.textContent = '방문예약 신청하기';
     });
+  });
+
+  /* ── 첫 화면 팝업 ── */
+  var pw = $('#pw'), PW_KEY = 'gdm_pw2', pwLast = null;
+  function pwHide(day){
+    if (day){ try{ localStorage.setItem(PW_KEY, String(Date.now() + 864e5)); }catch(_e){} }
+    pw.hidden = true;
+    document.body.style.overflow = '';
+    if (pwLast && pwLast.focus) pwLast.focus();
+  }
+  var pwSkip = false;
+  try{ pwSkip = Date.now() < (parseInt(localStorage.getItem(PW_KEY), 10) || 0); }catch(_e){}
+  if (!pwSkip){
+    setTimeout(function(){
+      pwLast = document.activeElement;
+      pw.hidden = false;
+      document.body.style.overflow = 'hidden';
+      $('#pwGo').focus();
+    }, 700);
+  }
+  $('#pwX').addEventListener('click', function(){ pwHide(false); });
+  $('#pwClose').addEventListener('click', function(){ pwHide(false); });
+  $('#pwToday').addEventListener('click', function(){ pwHide(true); });
+  $('#pwGo').addEventListener('click', function(){ pwHide(false); });
+  pw.addEventListener('click', function(e){ if (e.target === pw) pwHide(false); });
+  pw.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ pwHide(false); return; }
+    if (e.key !== 'Tab') return;
+    var f = $$('button,a[href]', pw);           /* 모달 밖으로 탭이 새지 않게 */
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
   });
 
 })();
