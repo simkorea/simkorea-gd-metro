@@ -3,3 +3,6 @@ _raw/
 _opt.txt
 .vercel
 .DS_Store
+
+# 광고 소재 작업 폴더 (배포 대상 아님)
+ads/
