@@ -55,6 +55,7 @@
         if (!result) return;
         if (result.status === 'blocked') showBlockOverlay();
         else if (result.status === 'warn') showWarnBanner();
+        else maybeSuggestBookmark(result);
       })
       .catch(function () { /* 판정 실패 시 절대 막지 않는다 */ });
   })();
@@ -96,6 +97,64 @@
       document.body.innerHTML = '';
       document.body.appendChild(box);
     } catch (e) {}
+  }
+
+  // ── 단골 고객에게 즐겨찾기를 권한다 ─────────────────────────
+  // 이미 우리를 아는 사람이 매번 검색창에 치고 광고를 눌러 들어오면,
+  // 그 클릭도 광고비가 나간다. 실제 기록에서 상호작용이 6~8회씩 있는
+  // 재방문 IP가 여럿 확인됐다. 이분들은 막을 대상이 아니라 다음부터
+  // 광고를 거치지 않게 안내할 대상이다.
+  //
+  // 경고가 아니다. 문구도 기능도 안내에 가깝게 둔다.
+  function maybeSuggestBookmark(result) {
+    try {
+      var hits = Number(result.ad_hits || 0);
+      var eng  = Number(result.ad_engaged || 0);
+
+      // 광고로 3번 넘게 들어왔고, 그중 실제로 둘러본 적이 있는 사람만.
+      // 반응이 없는 쪽은 부정클릭일 수 있으므로 권하지 않는다.
+      if (hits < 3 || eng < 1) return;
+
+      // 한 번 보여주면 30일간 다시 띄우지 않는다
+      var KEY = 'adguard_bm_until';
+      try {
+        if (Date.now() < (parseInt(localStorage.getItem(KEY), 10) || 0)) return;
+      } catch (e) { /* 저장이 막혀 있으면 그냥 보여준다 */ }
+
+      var bar = document.createElement('div');
+      bar.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:2147482000;' +
+        'max-width:420px;margin:0 auto;background:#1f2937;color:#f9fafb;' +
+        'border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.6;' +
+        'box-shadow:0 10px 30px -10px rgba(0,0,0,.5);' +
+        'font-family:system-ui,-apple-system,sans-serif;display:flex;gap:12px;align-items:flex-start;';
+
+      var msg = document.createElement('div');
+      msg.style.cssText = 'flex:1';
+      msg.innerHTML = '자주 찾아주셔서 감사합니다.<br>' +
+        '<span style="color:#cbd5e1">즐겨찾기에 추가해 두시면 다음부터 바로 들어오실 수 있습니다.</span>';
+
+      var close = document.createElement('button');
+      close.type = 'button';
+      close.textContent = '닫기';
+      close.style.cssText = 'flex:0 0 auto;background:none;border:1px solid rgba(255,255,255,.3);' +
+        'color:#e5e7eb;border-radius:8px;padding:6px 10px;font-size:12.5px;cursor:pointer;';
+      close.addEventListener('click', function () {
+        try { localStorage.setItem(KEY, String(Date.now() + 30 * 864e5)); } catch (e) {}
+        if (bar.parentNode) bar.parentNode.removeChild(bar);
+      });
+
+      bar.appendChild(msg);
+      bar.appendChild(close);
+
+      function show() { document.body.appendChild(bar); }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', show);
+      } else { show(); }
+
+      setTimeout(function () {
+        if (bar.parentNode) bar.parentNode.removeChild(bar);
+      }, 12000);
+    } catch (e) { /* 안내가 페이지를 망가뜨리면 안 된다 */ }
   }
 
   function showWarnBanner() {
